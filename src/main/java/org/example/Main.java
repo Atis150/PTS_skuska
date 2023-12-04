@@ -1,19 +1,67 @@
 package org.example;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.interactions.Actions;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        //DRIVER SETUP
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\attil\\Desktop\\UKF\\Magisterske_studium\\2Z\\PTS\\chromedriver-119.0.6\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        //OPEN FIRST PAGE BY DRIVER
+        driver.get("https://ais2.ukf.sk/ais/start.do");
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        try {
+            Thread.sleep(1000);
+//LOGIND DATA
+            String login = "290202";
+            String password = "***";
+
+            //log in to ais
+            driver.findElement(
+                    By.xpath("/html/body/div[6]/button[1]")).click();
+
+            driver.findElement(
+                    By.xpath("//*[@id=\"login\"]")
+            ).sendKeys(login);
+
+            driver.findElement(
+                    By.xpath("//*[@id=\"heslo\"]")
+            ).sendKeys(password);
+
+            driver.findElement(
+                    By.id("login-form-submit-btn")
+            ).click();
+
+            Thread.sleep(2000);
+
+            //start and stop video
+            driver.findElement(
+                    By.xpath("html/body")).click();
+            Thread.sleep(7000);
+            driver.findElement(
+                    By.xpath("html/body")).click();
+
+            //logging out
+            driver.findElement(
+                    By.xpath("/html/body/app-root/lib-app-header/nav/div[3]/a/span")).click();
+            driver.findElement(
+                    By.xpath("/html/body/app-root/lib-app-header/nav/div[3]/div/a/span")).click();
+
+
+            Thread.sleep(5000);
+
+
+        }catch (InterruptedException e){
+            //PRINT THE ERROR OUT
+            e.printStackTrace();
         }
+
+        //CLOSE THE BROWSER
+        driver.quit();
     }
 }
