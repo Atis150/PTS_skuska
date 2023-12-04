@@ -19,7 +19,7 @@ public class Main {
             Thread.sleep(1000);
 //LOGIND DATA
             String login = "290202";
-            String password = "***";
+            String password = "Ukf0002081684";
 
             //log in to ais
             driver.findElement(
@@ -45,6 +45,8 @@ public class Main {
             Thread.sleep(7000);
             driver.findElement(
                     By.xpath("html/body")).click();
+
+            Thread.sleep(2000);
 
             //logging out
             driver.findElement(
